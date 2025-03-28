@@ -3,41 +3,59 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { loginSchema } from "../schema/authSchema";
+import { loginSchema, registerSchema } from "../schema/authSchema";
+import useMutationLogin from "./useMutationLogin";
+import useMutationRegister from "./useMutationRegister";
 
 export type LoginFormData = z.infer<typeof loginSchema>;
+export type RegisterFormData = z.infer<typeof registerSchema>;
 
 export function useAuth() {
-  const form = useForm<LoginFormData>({
+  const {
+    mutate: loginMutation,
+    isPending: isLoginPending,
+    error: loginError,
+  } = useMutationLogin();
+  const {
+    mutate: registerMutation,
+    isPending: isRegisterPending,
+    error: registerError,
+  } = useMutationRegister();
+
+  const loginForm = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
-  });
-
-  const loginMutation = useMutation({
-    mutationFn: async (data: LoginFormData) => {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) throw new Error("Login gagal");
-      return response.json();
-    },
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log(error);
+    defaultValues: {
+      email: "",
+      password: "",
     },
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    loginMutation.mutate(data);
+  const registerForm = useForm<RegisterFormData>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = (data: LoginFormData | RegisterFormData) => {
+    if ("name" in data) {
+      registerMutation(data);
+    } else {
+      loginMutation(data);
+    }
   };
 
   return {
-    form,
+    loginForm,
+    registerForm,
     loginMutation,
     onSubmit,
+    registerMutation,
+    isLoginPending,
+    isRegisterPending,
+    loginError,
+    registerError,
   };
 }
