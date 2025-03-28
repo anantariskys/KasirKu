@@ -12,6 +12,7 @@ const Input = ({
   error,
   className,
   size = "md",
+  disabled = false,
   ...props
 }: InputProps) => {
   const textSize = {
@@ -24,14 +25,15 @@ const Input = ({
     <div className="w-full">
       {label && (
         <label
-          className={`block ${size === "sm" ? "text-xs" : "text-sm"} font-medium text-foreground-light mb-1`}
+          className={`block ${size === "sm" ? "text-xs" : "text-sm"} font-medium ${disabled ? "text-gray-400" : "text-foreground-light"} mb-1`}
         >
           {label}
         </label>
       )}
       <input
         type="text"
-        className={`w-full rounded-md border border-tertiary-300 ${textSize} ${
+        disabled={disabled}
+        className={`w-full rounded-md border disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed disabled:border-gray-200 border-tertiary-300 ${textSize} ${
           size === "sm" ? "p-1.5" : size === "lg" ? "p-3" : "p-2"
         } focus:outline-none focus:ring-2 focus:ring-primary-500 ${
           error ? "border-red-500" : ""
