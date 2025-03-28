@@ -1,3 +1,4 @@
+import Register from "@/client/modules/auth/register";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -5,6 +6,6 @@ export const metadata: Metadata = {
   description: "Register to your KasirKu account",
 };
 
-export default function Register() {
-  return <div>Register</div>;
+export default function RegisterPage() {
+  return <Register />;
 }
