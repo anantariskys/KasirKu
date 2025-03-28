@@ -5,44 +5,48 @@ import Link from "next/link";
 import { useAuth } from "../hooks/useAuth";
 
 export default function Login() {
-  const { form, loginMutation, onSubmit } = useAuth();
+  const { loginForm, onSubmit, isLoginPending, loginError } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = form;
+  } = loginForm;
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="w-full max-w-md bg-tertiary-200/25 p-8 space-y-4 rounded-lg"
+      className="w-full max-w-md bg-tertiary-200/25 p-8 space-y-2 rounded-lg"
     >
       <h1 className="text-2xl font-bold mb-4">Login</h1>
       <Input
         label="Email"
         {...register("email")}
         error={errors.email?.message}
+        disabled={isLoginPending}
       />
       <Input
         label="Password"
         type="password"
         {...register("password")}
         error={errors.password?.message}
+        disabled={isLoginPending}
       />
       <Button
         variant="primary"
         type="submit"
         width="full"
         size="md"
-        disabled={loginMutation.isPending}
+        disabled={isLoginPending}
       >
-        {loginMutation.isPending ? "Loading..." : "Login"}
+        {isLoginPending ? "Loading..." : "Login"}
       </Button>
-      {loginMutation.isError && (
-        <p className="text-red-500 text-sm">
-          {loginMutation.error.message || "Terjadi kesalahan"}
-        </p>
-      )}
+      <div className="h-9">
+        {loginError && (
+          <p className="text-red-500 text-xs">
+            {loginError.message || "Terjadi kesalahan"}
+          </p>
+        )}
+      </div>
       <Link href="/register" className="text-sm text-foreground-light">
         Belum punya akun? <span className="text-primary-500">Daftar</span>
       </Link>
