@@ -4,6 +4,7 @@ import { useAuthStore } from "../../store/useAuthStore";
 import Input from "../Input";
 import { useState } from "react";
 import Logout from "../Logout";
+import Link from "next/link";
 
 export default function Navbar() {
   const { user } = useAuthStore();
@@ -51,7 +52,8 @@ export default function Navbar() {
 
               {isOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-1">
-                  <button
+                  <Link
+                    href="/profile"
                     onClick={() => {
                       setIsOpen(false);
                     }}
@@ -59,7 +61,7 @@ export default function Navbar() {
                   >
                         <LuUser className="w-5 h-5" />
                     Profile
-                  </button>
+                  </Link>
                   <Logout type="secondary"/>
                  
                 </div>

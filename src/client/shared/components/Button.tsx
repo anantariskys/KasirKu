@@ -47,6 +47,7 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const baseClasses = [
+    "h-fit",
     "rounded-md",
     "font-medium",
     "transition-colors",
