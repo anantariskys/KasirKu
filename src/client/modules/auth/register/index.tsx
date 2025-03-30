@@ -5,8 +5,7 @@ import Link from "next/link";
 import { useAuth } from "../hooks/useAuth";
 
 export default function Register() {
-  const { registerForm, onSubmit, isRegisterPending, registerError } =
-    useAuth();
+  const { registerForm, onSubmit, isRegisterPending, apiResponse } = useAuth();
   const {
     register,
     handleSubmit,
@@ -26,9 +25,22 @@ export default function Register() {
         disabled={isRegisterPending}
       />
       <Input
+        label="Username"
+        {...register("username")}
+        error={errors.username?.message}
+        disabled={isRegisterPending}
+      />
+      <Input
         label="Email"
         {...register("email")}
         error={errors.email?.message}
+        disabled={isRegisterPending}
+      />
+      <Input
+        label="Password"
+        type="password"
+        {...register("password")}
+        error={errors.password?.message}
         disabled={isRegisterPending}
       />
       <Button
@@ -41,9 +53,9 @@ export default function Register() {
         {isRegisterPending ? "Loading..." : "Register"}
       </Button>
       <div className="h-9">
-        {registerError && (
+        {apiResponse && (
           <p className="text-red-500 text-xs">
-            {registerError.message || "Terjadi kesalahan"}
+            {apiResponse.message || "Terjadi kesalahan"}
           </p>
         )}
       </div>

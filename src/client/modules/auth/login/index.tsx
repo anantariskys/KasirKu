@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useAuth } from "../hooks/useAuth";
 
 export default function Login() {
-  const { loginForm, onSubmit, isLoginPending, loginError } = useAuth();
+  const { loginForm, onSubmit, isLoginPending, apiResponse } = useAuth();
   const {
     register,
     handleSubmit,
@@ -41,9 +41,9 @@ export default function Login() {
         {isLoginPending ? "Loading..." : "Login"}
       </Button>
       <div className="h-9">
-        {loginError && (
+        {apiResponse && (
           <p className="text-red-500 text-xs">
-            {loginError.message || "Terjadi kesalahan"}
+            {apiResponse.message || "Terjadi kesalahan"}
           </p>
         )}
       </div>
