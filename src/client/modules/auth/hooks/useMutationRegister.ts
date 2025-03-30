@@ -3,7 +3,7 @@
 import { UseMutationOptions, useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { RegisterFormData } from "./useAuth";
-import axiosInstance from "@/client/shared/core/axios.instance.";
+import axiosInstance from "@/client/shared/core/axios.instance";
 
 type RegisterSuccessResponse = {
   token: string;
@@ -21,7 +21,8 @@ const postRegister = async (
   formData.append("name", data.name);
   formData.append("email", data.email);
   formData.append("password", data.password);
-  const response = await axiosInstance.post("/auth/register", formData);
+  formData.append("username", data.username);
+  const response = await axiosInstance.post("/api/auth/register", formData);
   return response.data;
 };
 

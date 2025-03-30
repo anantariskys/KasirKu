@@ -3,36 +3,41 @@
 import { UseMutationOptions, useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { LoginFormData } from "./useAuth";
-import axiosInstance from "@/client/shared/core/axios.instance.";
+import coreApi from "@/client/shared/core/axios.instance";
 
-type LoginSuccessResponse = {
-  token: string;
-  user: {
-    id: string;
-    email: string;
-    name: string;
+type LoginResponse = {
+  data: {
+    token: string;
+    user: {
+      id: string;
+      email: string;
+      name: string;
+      username: string;
+    };
   };
+  message: string;
+  success: boolean;
 };
 
 const postLogin = async (
   data: LoginFormData,
-): Promise<LoginSuccessResponse> => {
+): Promise<LoginResponse> => {
   const formData = new FormData();
   formData.append("email", data.email);
   formData.append("password", data.password);
-  const response = await axiosInstance.post("/auth/login", formData);
+  const response = await coreApi.post("/api/auth/login", formData);
   return response.data;
 };
 
 const useMutationLogin = (
   options?: Omit<
-    UseMutationOptions<LoginSuccessResponse, AxiosError, LoginFormData>,
+    UseMutationOptions<LoginResponse, AxiosError, LoginFormData>,
     "mutationFn"
   >,
 ) => {
   const mutationFn = async (
     data: LoginFormData,
-  ): Promise<LoginSuccessResponse> => postLogin(data);
+  ): Promise<LoginResponse> => postLogin(data);
 
   return useMutation({
     mutationFn,
