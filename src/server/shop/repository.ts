@@ -1,8 +1,8 @@
-import { Shop } from "@prisma/client";
 import prisma from "../db/prisma";
+import { ShopDB } from "./types";
 
 export const shopRepository = {
-  create: async (shop: Shop) => {
+  create: async (shop: ShopDB) => {
     return prisma.shop.create({ data: shop });
   },
   findById: async (id: string) => {
@@ -14,7 +14,7 @@ export const shopRepository = {
   findAll: async () => {
     return prisma.shop.findMany();
   },
-  update: async (id: string, shop: Shop) => {
+  update: async (id: string, shop: ShopDB) => {
     return prisma.shop.update({ where: { id }, data: shop });
   },
 };
