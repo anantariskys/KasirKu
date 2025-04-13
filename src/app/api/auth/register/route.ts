@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import authService from "@/server/services/auth.services";
+import authService from "@/server/auth/services";
 import { ApiResponse } from "@/server/utils/response";
-import { userRepository } from "@/server/repositories/user.repository";
+import { userRepository } from "@/server/user/repository";
 
 export async function POST(req: NextRequest) {
   try {
