@@ -1,5 +1,4 @@
-'use client'
-import Button from "@/client/shared/components/Button";
+"use client";
 import { useEditProfile } from "../hooks/useEditProfile";
 
 export default function ProfileHeader() {
@@ -15,7 +14,7 @@ export default function ProfileHeader() {
               .join("")
               .toUpperCase()}
           </p>
-        </div>    
+        </div>
         <div>
           <h1 className="text-2xl font-bold">{user?.name}</h1>
           <p className="text-sm text-foreground-light/50">{user?.email}</p>

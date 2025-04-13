@@ -14,24 +14,24 @@ describe("getShopUsecase", () => {
     const mockShops: Shop[] = [
       {
         id: "1",
-        name: "Shop 1", 
+        name: "Shop 1",
         userId: "user1",
         description: "",
         imageUrl: "",
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       },
       {
         id: "2",
         name: "Shop 2",
-        userId: "user2", 
+        userId: "user2",
         description: "",
         imageUrl: "",
         createdAt: new Date(),
-        updatedAt: new Date()
-      }
+        updatedAt: new Date(),
+      },
     ];
-    
+
     (shopRepository.findAll as jest.Mock).mockResolvedValue(mockShops);
 
     // Act

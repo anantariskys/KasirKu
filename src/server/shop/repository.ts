@@ -17,5 +17,4 @@ export const shopRepository = {
   update: async (id: string, shop: Shop) => {
     return prisma.shop.update({ where: { id }, data: shop });
   },
-  
 };

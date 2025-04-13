@@ -19,13 +19,13 @@ module.exports = {
           dark: "#1A1A1A",
         },
         foreground: {
-          light: "#1A1A1A", 
+          light: "#1A1A1A",
           dark: "#FFFFFF",
         },
         primary: {
           50: "#F5F3FF",
           100: "#EDE9FE",
-          200: "#DDD6FE", 
+          200: "#DDD6FE",
           300: "#C4B5FD",
           400: "#A78BFA",
           500: "#8B5CF6",

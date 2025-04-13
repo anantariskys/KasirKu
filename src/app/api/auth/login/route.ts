@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
         maxAge: 60 * 5, // 5 minutes
       });
     }
-    
+
     return NextResponse.json(
       ApiResponse.success(response, "User logged in successfully"),
     );

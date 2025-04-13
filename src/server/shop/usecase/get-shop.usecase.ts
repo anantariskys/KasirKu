@@ -4,4 +4,3 @@ export const getShopUsecase = async () => {
   const shops = await shopRepository.findAll();
   return shops;
 };
-

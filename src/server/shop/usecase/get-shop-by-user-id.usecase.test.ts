@@ -13,7 +13,9 @@ describe("getShopByUserIdUsecase", () => {
 
   it("should throw error when user id is not provided", async () => {
     // Act & Assert
-    await expect(getShopByUserIdUsecase("")).rejects.toThrow("User ID is required");
+    await expect(getShopByUserIdUsecase("")).rejects.toThrow(
+      "User ID is required",
+    );
     expect(userRepository.findById).not.toHaveBeenCalled();
     expect(shopRepository.findByUserId).not.toHaveBeenCalled();
   });
@@ -26,7 +28,7 @@ describe("getShopByUserIdUsecase", () => {
       username: "testuser",
       password: "password",
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     const mockShop: Shop = {
@@ -36,7 +38,7 @@ describe("getShopByUserIdUsecase", () => {
       description: "",
       imageUrl: "",
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     (userRepository.findById as jest.Mock).mockResolvedValue(mockUser);
@@ -56,7 +58,9 @@ describe("getShopByUserIdUsecase", () => {
     (userRepository.findById as jest.Mock).mockResolvedValue(null);
 
     // Act & Assert
-    await expect(getShopByUserIdUsecase("invalid-user")).rejects.toThrow("User not found");
+    await expect(getShopByUserIdUsecase("invalid-user")).rejects.toThrow(
+      "User not found",
+    );
     expect(shopRepository.findByUserId).not.toHaveBeenCalled();
   });
 
@@ -69,7 +73,7 @@ describe("getShopByUserIdUsecase", () => {
       username: "testuser",
       password: "password",
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     };
 
     (userRepository.findById as jest.Mock).mockResolvedValue(mockUser);

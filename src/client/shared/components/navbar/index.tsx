@@ -31,7 +31,6 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <div className="relative">
               <button className="flex items-center gap-2 text-gray-700 hover:text-primary-500 transition-colors">
-            
                 <span className="text-sm font-medium">{user?.username}</span>
               </button>
             </div>
@@ -39,7 +38,7 @@ export default function Navbar() {
             <div className="h-6 w-px bg-gray-200" />
 
             <div className="relative">
-              <button 
+              <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg transition-all duration-300"
               >
@@ -47,7 +46,9 @@ export default function Navbar() {
                   <span className="text-sm font-medium text-gray-600">A</span>
                 </div>
                 <span className="text-sm font-medium text-gray-700">Admin</span>
-                <LuChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+                <LuChevronDown
+                  className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                />
               </button>
 
               {isOpen && (
@@ -59,11 +60,10 @@ export default function Navbar() {
                     }}
                     className="w-full text-left px-4 flex py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                   >
-                        <LuUser className="w-5 h-5" />
+                    <LuUser className="w-5 h-5" />
                     Profile
                   </Link>
-                  <Logout type="secondary"/>
-                 
+                  <Logout type="secondary" />
                 </div>
               )}
             </div>

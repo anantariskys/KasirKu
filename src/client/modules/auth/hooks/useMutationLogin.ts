@@ -19,9 +19,7 @@ type LoginResponse = {
   success: boolean;
 };
 
-const postLogin = async (
-  data: LoginFormData,
-): Promise<LoginResponse> => {
+const postLogin = async (data: LoginFormData): Promise<LoginResponse> => {
   const formData = new FormData();
   formData.append("email", data.email);
   formData.append("password", data.password);
@@ -35,9 +33,8 @@ const useMutationLogin = (
     "mutationFn"
   >,
 ) => {
-  const mutationFn = async (
-    data: LoginFormData,
-  ): Promise<LoginResponse> => postLogin(data);
+  const mutationFn = async (data: LoginFormData): Promise<LoginResponse> =>
+    postLogin(data);
 
   return useMutation({
     mutationFn,

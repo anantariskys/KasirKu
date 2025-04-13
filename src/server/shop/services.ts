@@ -1,6 +1,5 @@
-import { userRepository } from "../user/repository";
 import { shopRepository } from "./repository";
-import { Shop, User } from "@prisma/client";
+import { Shop } from "@prisma/client";
 
 class ShopService {
   async createShop(shop: Shop) {

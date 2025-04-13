@@ -6,7 +6,6 @@ import { LuSettings } from "react-icons/lu";
 import { menuItems } from "./path";
 import { MenuItem } from "./MenuItems";
 
-
 export default function Sidebar() {
   const pathname = usePathname();
 
