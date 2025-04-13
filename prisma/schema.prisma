@@ -15,4 +15,46 @@ model User {
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  shop Shop[]
+  products Product[]
+}
+
+model Shop {
+  id          String        @id @default(uuid())
+  name        String
+  description String
+  imageUrl    String
+  userId      String
+  user        User         @relation(fields: [userId], references: [id])
+  products    ProductShop[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Product {
+  id          String        @id @default(uuid())
+  name        String
+  description String
+  imageUrl    String
+  price       Int
+  stock       Int
+  userId      String
+  user        User         @relation(fields: [userId], references: [id])
+  shops       ProductShop[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model ProductShop {
+  id        String   @id @default(uuid())
+  productId String
+  shopId    String
+  product   Product  @relation(fields: [productId], references: [id])
+  shop      Shop     @relation(fields: [shopId], references: [id])
+  price     Int
+  stock     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([productId, shopId])
 }
